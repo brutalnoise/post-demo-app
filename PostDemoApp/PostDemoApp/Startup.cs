@@ -6,6 +6,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PostDemoApp.UnitOfWorks.Interfaces;
 using PostDemoApp.UnitOfWorks;
+using AutoMapper;
+using PostDemoApp.Extensions;
+using PostDemoApp.Services;
+using PostDemoApp.Services.Interfaces;
 
 namespace PostDemoApp
 {
@@ -51,6 +55,14 @@ namespace PostDemoApp
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PostDemoApp", Version = "v1" });
             });
 
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             this.LoadServices(services);
         }
 
@@ -81,6 +93,9 @@ namespace PostDemoApp
         {
             services.AddHttpClient<IUnitOfWork>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICommentService, CommentService>();
         }
     }
 }
