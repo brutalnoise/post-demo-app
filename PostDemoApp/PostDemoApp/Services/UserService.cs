@@ -20,8 +20,7 @@ namespace PostDemoApp.Services
 
         public async Task<UserModel> Add(UserModel model)
         {
-            var res = await this.unitOfWork.UserRepository.GetAllAsync();
-            return this.mapper.Map<UserModel>(res);
+            throw new NotImplementedException();
         }
 
         public async Task Delete(int id)
@@ -31,7 +30,8 @@ namespace PostDemoApp.Services
 
         public async Task<IEnumerable<UserModel>> List()
         {
-            throw new NotImplementedException();
+            var res = await this.unitOfWork.UserRepository.GetAllAsync();
+            return this.mapper.Map<List<UserModel>>(res);
         }
 
         public async Task<UserModel> Update(UserModel model)

@@ -20,8 +20,7 @@ namespace PostDemoApp.Services
 
         public async Task<CommentModel> Add(CommentModel model)
         {
-            var res = await this.unitOfWork.CommentRepository.GetAllAsync();
-            return this.mapper.Map<CommentModel>(res);
+            throw new NotImplementedException();
         }
 
         public async Task Delete(int id)
@@ -31,7 +30,8 @@ namespace PostDemoApp.Services
 
         public async Task<IEnumerable<CommentModel>> List()
         {
-            throw new NotImplementedException();
+            var res = await this.unitOfWork.CommentRepository.GetAllAsync();
+            return this.mapper.Map<List<CommentModel>>(res);
         }
 
         public async Task<CommentModel> Update(CommentModel model)

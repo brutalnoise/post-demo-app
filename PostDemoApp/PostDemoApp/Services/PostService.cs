@@ -20,8 +20,7 @@ namespace PostDemoApp.Services
 
         public async Task<PostModel> Add(PostModel model)
         {
-            var res = await this.unitOfWork.PostRepository.GetAllAsync();
-            return this.mapper.Map<PostModel>(res);
+            throw new NotImplementedException();
         }
 
         public async Task Delete(int id)
@@ -31,7 +30,8 @@ namespace PostDemoApp.Services
 
         public async Task<IEnumerable<PostModel>> List()
         {
-            throw new NotImplementedException();
+            var res = await this.unitOfWork.PostRepository.GetAllAsync();
+            return this.mapper.Map<List<PostModel>>(res);
         }
 
         public async Task<PostModel> Update(PostModel model)
