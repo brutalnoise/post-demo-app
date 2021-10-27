@@ -76,6 +76,8 @@ namespace PostDemoApp
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PostDemoApp v1"));
             }
 
+            app.UseCors(myAllowSpecificOrigins);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
