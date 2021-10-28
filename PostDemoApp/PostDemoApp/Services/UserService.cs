@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PostDemoApp.Entities;
 using PostDemoApp.Models;
 using PostDemoApp.Services.Interfaces;
 using PostDemoApp.UnitOfWorks.Interfaces;
@@ -20,12 +21,18 @@ namespace PostDemoApp.Services
 
         public async Task<UserModel> Add(UserModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<User>(model);
+
+            var id = await this.unitOfWork.UserRepository.AddAsync(entity);
+
+            model.Id = id;
+
+            return model;
         }
 
         public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await this.unitOfWork.UserRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<UserModel>> List()
@@ -36,7 +43,10 @@ namespace PostDemoApp.Services
 
         public async Task<UserModel> Update(UserModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<User>(model);
+            await this.unitOfWork.UserRepository.UpdateAsync(entity);
+
+            return model;
         }
     }
 }

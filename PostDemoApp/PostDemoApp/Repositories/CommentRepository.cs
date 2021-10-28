@@ -4,7 +4,7 @@ using System.Net.Http;
 
 namespace PostDemoApp.Repositories
 {
-    public class CommentRepository : BaseRepository<Post>
+    public class CommentRepository : BaseRepository<Comment>
     {
         public CommentRepository(HttpClient httpClient): base(httpClient)
         {

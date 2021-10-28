@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PostDemoApp.Entities;
 using PostDemoApp.Models;
 using PostDemoApp.Services.Interfaces;
 using PostDemoApp.UnitOfWorks.Interfaces;
@@ -20,12 +21,18 @@ namespace PostDemoApp.Services
 
         public async Task<CommentModel> Add(CommentModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<Comment>(model);
+            
+            var id = await this.unitOfWork.CommentRepository.AddAsync(entity);
+
+            model.Id = id;
+
+            return model;
         }
 
         public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await this.unitOfWork.CommentRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<CommentModel>> List()
@@ -36,7 +43,10 @@ namespace PostDemoApp.Services
 
         public async Task<CommentModel> Update(CommentModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<Comment>(model);
+            await this.unitOfWork.CommentRepository.UpdateAsync(entity);
+
+            return model;
         }
     }
 }

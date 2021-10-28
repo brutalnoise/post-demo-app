@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PostDemoApp.Entities;
 using PostDemoApp.Models;
 using PostDemoApp.Services.Interfaces;
 using PostDemoApp.UnitOfWorks.Interfaces;
@@ -20,12 +21,18 @@ namespace PostDemoApp.Services
 
         public async Task<PostModel> Add(PostModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<Post>(model);
+
+            var id = await this.unitOfWork.PostRepository.AddAsync(entity);
+
+            model.Id = id;
+
+            return model;
         }
 
         public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await this.unitOfWork.PostRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<PostModel>> List()
@@ -36,7 +43,10 @@ namespace PostDemoApp.Services
 
         public async Task<PostModel> Update(PostModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<Post>(model);
+            await this.unitOfWork.PostRepository.UpdateAsync(entity);
+
+            return model;
         }
     }
 }
