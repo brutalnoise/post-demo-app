@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Configuration } from "../constants/configuration";
-import { Comment } from "../../posts/intefraces/comment";
+import { Comment } from "../../posts/interfaces/comment";
 import { BaseHttpService } from "./baseHttp.service";
 
 @Injectable()

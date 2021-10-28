@@ -1,4 +1,6 @@
+import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
+import { ButtonRectangleComponent } from "./components/common/button-rectangle/button-rectangle.component";
 import { Configuration } from "./constants/configuration";
 import { BaseHttpService } from "./services/baseHttp.service";
 import { CommentService } from "./services/comment.service";
@@ -13,7 +15,21 @@ const services = [
   UserService
 ]
 
+const modules = [
+  CommonModule
+]
+
+const components = [
+  ButtonRectangleComponent
+]
+
 @NgModule({
+  imports: [...modules],
+  declarations: [...components],
+  exports: [
+    ...modules,
+  ...components
+]
 })
 
 export class SharedModule {
@@ -21,6 +37,7 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
+        ...modules,
         ...services
       ],
     };

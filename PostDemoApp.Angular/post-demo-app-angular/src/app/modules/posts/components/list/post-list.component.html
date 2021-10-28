@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Posts</h1>
+    </div>
+    <div class="panel panel-primary">
+        <app-button-rectangle (clicked)="refreshList()" [text]="'Refresh Posts'"></app-button-rectangle>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th class="hoverable" scope="col" (click)="sortByTitle()">Post Title <i class="material-icons header-icon" *ngIf="sortedByTitle">{{sortedAlphabetically ? 'expand_more' : 'expand_less'}}</i></th>
+                <th class="hoverable" scope="col" (click)="sortByAuthor()">Author <i class="material-icons  header-icon" *ngIf="!sortedByTitle">{{sortedAlphabetically ? 'expand_more' : 'expand_less'}}</i></th>
+                <th scope="col"># of Comments</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let post of posts">
+                  <tr app-post-list-entry [post]="post" (onDelete)="deletePost($event)" (onUpdate)="updatePost($event)"></tr>
+              </ng-container>
+            </tbody>
+          </table>
+    </div>
+</div>

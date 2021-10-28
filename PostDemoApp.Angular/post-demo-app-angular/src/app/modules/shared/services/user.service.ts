@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Configuration } from "../../shared/constants/configuration";
 import { BaseHttpService } from "../../shared/services/baseHttp.service";
-import { User } from "../../posts/intefraces/user";
+import { User } from "../../posts/interfaces/user";
 @Injectable()
 export class UserService extends BaseHttpService<User> {
 
