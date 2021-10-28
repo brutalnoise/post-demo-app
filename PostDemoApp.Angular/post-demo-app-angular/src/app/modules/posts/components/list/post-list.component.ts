@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Subscription } from "rxjs";
-import { PostService } from "../../services/post.service";
+import { PostService } from "src/app/modules/shared/services/post.service";
 
 @Component({
     selector: 'app-post-list',
