@@ -5,6 +5,7 @@ using PostDemoApp.Services.Interfaces;
 using PostDemoApp.UnitOfWorks.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PostDemoApp.Services
@@ -38,6 +39,14 @@ namespace PostDemoApp.Services
         public async Task<IEnumerable<CommentModel>> List()
         {
             var res = await this.unitOfWork.CommentRepository.GetAllAsync();
+            return this.mapper.Map<List<CommentModel>>(res);
+        }
+
+        public async Task<IEnumerable<CommentModel>> GetAllByPostId(int postId)
+        {
+            var res = await this.unitOfWork.CommentRepository.GetAllAsync();
+            res = res.Where(c => c.PostId == postId);
+
             return this.mapper.Map<List<CommentModel>>(res);
         }
 

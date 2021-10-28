@@ -5,16 +5,23 @@ import { PostListEntryComponent } from "./components/post-list-entry/post-list-e
 import { PostsRoutingModule } from "./posts-routing.module";
 import { CommonModule } from '@angular/common';
 import { PostDetailsComponent } from "./components/details/post-details.component";
+import { CommentCardComponent } from "./components/comments/comment-card/comment-card.component";
+import { CommentListComponent } from "./components/comments/comment-list/comment-list.component";
+import { AddCommentComponent } from "./components/comments/add-comment/add-comment.component";
+import { CommentEventEmitters } from "./events/commentEventEmitters";
 
 const components = [
   PostListComponent,
   PostListEntryComponent,
-  PostDetailsComponent
+  PostDetailsComponent,
+  CommentCardComponent,
+  CommentListComponent,
+  AddCommentComponent
 ];
 
-// const services = [
-
-// ];
+ const events = [
+  CommentEventEmitters
+];
 
 const imports = [
   SharedModule,
@@ -24,7 +31,7 @@ const imports = [
 @NgModule({
   imports: [...imports],
   declarations: [...components],
-  providers: [],
+  providers: [...events],
   exports: [...components]
 })
 export class PostsModule { }

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" [disabled]="disabled">
+<button type="button" class="btn btn-primary" [disabled]="disabled" (click)="onClick($event)">
     <i class="material-icons" *ngIf="icon">{{icon}}</i>
     {{text}}
 </button>

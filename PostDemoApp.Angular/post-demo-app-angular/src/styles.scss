@@ -1,11 +1,16 @@
-:root {
-    --blue-light: #4ec3e0;
-    --grey-light: #e0e0e0;
-    --off-white: #fcfcfc;
-    --white: #ffffff;
-    --box-shadow: 1px 4px 16px 0 rgba(0, 0, 0, 0.08), 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
-  }
-
 .hoverable {
     cursor: pointer;
+}
+
+.pull-right {
+    float:right;
+}
+
+.jumbotron {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+:host {
+    background-color: #cfcdc9;
 }

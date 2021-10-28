@@ -2,7 +2,21 @@
     <div class="jumbotron">
         <h1>Post Details</h1>
     </div>
-    <div class="panel panel-primary">
-        
+    <div class="panel panel-primary mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{post?.title}}</h5>
+                <p class="card-text" [innerHtml]="post? post.body : '' | safeHtml"></p>
+            </div>
+        </div>
     </div>
+
+    <ng-container *ngIf="post">
+        <div class="jumbotron">
+            <h1>Comments</h1>
+        </div>
+        <app-comment-list [postId]="post.id"></app-comment-list>
+    
+        <app-add-comment [postId]="post.id"></app-add-comment>
+    </ng-container>
 </div>

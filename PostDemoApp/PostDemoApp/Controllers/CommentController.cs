@@ -25,6 +25,14 @@ namespace CommentDemoApp.Controllers
         }
 
         [HttpGet]
+        [Route("GetAllByPostId/{postId}")]
+        public async Task<IActionResult> GetAllByPostId(int postId)
+        {
+            var result = await this.commentService.GetAllByPostId(postId);
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("Get/{id}")]
         public async Task<IActionResult> GetById(int id)
         {

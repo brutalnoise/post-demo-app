@@ -81,11 +81,11 @@ namespace PostDemoApp.Repositories
 
             var allEntitiesList = allEntities.OrderBy(x => x.Id).ToList();
 
-            entity.Id = allEntitiesList.Count > 0 ? allEntitiesList.LastOrDefault().Id : 1;
+            entity.Id = allEntitiesList.Count > 0 ? allEntitiesList.LastOrDefault().Id + 1 : 1;
 
             allEntitiesList.Add(entity);
 
-            await WriteToFileAsync(this.completeFilePath, allEntities);
+            await WriteToFileAsync(this.completeFilePath, allEntitiesList);
 
             return entity.Id;
         }
