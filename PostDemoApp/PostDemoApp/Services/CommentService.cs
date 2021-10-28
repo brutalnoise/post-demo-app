@@ -48,5 +48,11 @@ namespace PostDemoApp.Services
 
             return model;
         }
+
+        public async Task<CommentModel> GetById(int id)
+        {
+            var entity = await this.unitOfWork.CommentRepository.GetByIdAsync(id);
+            return this.mapper.Map<CommentModel>(entity);
+        }
     }
 }

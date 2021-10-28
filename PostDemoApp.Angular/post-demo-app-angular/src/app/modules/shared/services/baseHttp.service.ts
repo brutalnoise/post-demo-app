@@ -18,6 +18,10 @@ export class BaseHttpService<T> {
         return this.http.get<T[]>(`${this.baseUrl}List`);
     }
 
+    public Get(id: number): Observable<T> {
+        return this.http.get<T>(`${this.baseUrl}Get/${id}`);
+    }
+
     public Add(model: T): Observable<T> {
         return this.http.post<T>(`${this.baseUrl}Add`, model);
     }

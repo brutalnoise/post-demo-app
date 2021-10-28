@@ -11,5 +11,6 @@ namespace PostDemoApp.Repositories.Interfaces
         Task UpdateAsync(TEntity entity);
         Task<int> AddAsync(TEntity entity);
         Task DeleteAsync(int id);
+        Task<TEntity> GetByIdAsync(int id);
     }
 }

@@ -7,9 +7,10 @@ namespace PostDemoApp.Services.Interfaces
 {
     public interface IBaseServiceInterface<TModel>
     {
-        public Task<TModel> Add(TModel model);
-        public Task<TModel> Update(TModel model);
-        public Task Delete(int id);
-        public Task<IEnumerable<TModel>> List();
+        Task<TModel> Add(TModel model);
+        Task<TModel> Update(TModel model);
+        Task Delete(int id);
+        Task<IEnumerable<TModel>> List();
+        Task<TModel> GetById(int id);
     }
 }

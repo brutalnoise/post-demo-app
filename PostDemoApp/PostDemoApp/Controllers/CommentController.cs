@@ -24,6 +24,14 @@ namespace CommentDemoApp.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("Get/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await this.commentService.GetById(id);
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> Add([FromBody] CommentModel model)

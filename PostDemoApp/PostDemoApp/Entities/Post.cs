@@ -8,7 +8,8 @@ namespace PostDemoApp.Entities
         public virtual User User { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
-
+        public bool IsFavourite { get; set; }
+        
         public Post()
         {
 

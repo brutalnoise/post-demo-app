@@ -24,6 +24,14 @@ namespace UserDemoApp.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("Get/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await this.userService.GetById(id);
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> Add([FromBody] UserModel model)

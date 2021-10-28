@@ -24,6 +24,14 @@ namespace PostDemoApp.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("Get/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await this.postService.GetById(id);
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> Add([FromBody] PostModel model)

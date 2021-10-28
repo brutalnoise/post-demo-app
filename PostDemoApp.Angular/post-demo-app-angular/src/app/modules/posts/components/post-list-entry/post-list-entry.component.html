@@ -1,5 +1,5 @@
-<th scope="row" class="hoverable"><i class="material-icons">{{post.isFavourite ? 'star' : 'star_outline'}}</i></th>
-<td>{{post.title}}</td>
+<th scope="row"><i class="material-icons hoverable" (click)="updateIsFavourite()">{{post.isFavourite ? 'star' : 'star_outline'}}</i></th>
+<td><a [routerLink]="['/posts/details/' + post.id]">{{post.title}}</a></td>
 <td>{{post.user?.name}}</td>
 <td>{{post.commentsCount}}</td>
 <td class="hoverable" (click)="deletePost()"><i class="material-icons">delete</i></td>

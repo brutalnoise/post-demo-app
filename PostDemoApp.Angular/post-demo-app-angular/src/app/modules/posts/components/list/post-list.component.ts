@@ -59,8 +59,9 @@ export class PostListComponent {
 
     updatePost(post: Post){
         this.subscriptions.add(this.postService.Update(post).subscribe(res => {
+            console.log('updated');
             let matchingPost = this.posts.find(p => p.id === post.id);
-
+            
             if(matchingPost) {
                 this.posts[this.posts.indexOf(matchingPost)] = post;
             }

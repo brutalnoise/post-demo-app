@@ -48,5 +48,11 @@ namespace PostDemoApp.Services
 
             return model;
         }
+
+        public async Task<UserModel> GetById(int id)
+        {
+            var entity = await this.unitOfWork.UserRepository.GetByIdAsync(id);
+            return this.mapper.Map<UserModel>(entity);
+        }
     }
 }

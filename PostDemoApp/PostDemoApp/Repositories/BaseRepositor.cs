@@ -42,18 +42,37 @@ namespace PostDemoApp.Repositories
             return data;
         }
 
+        public virtual async Task<TEntity> GetByIdAsync(int id)
+        {
+
+            IEnumerable<TEntity> data = null;
+
+            if (File.Exists(this.completeFilePath))
+            {
+                data = await GetAllFromDisk(this.completeFilePath);
+            }
+            else
+            {
+                data = await httpClient.GetFromJsonAsync<IEnumerable<TEntity>>(baseUrl);
+                await WriteToFileAsync(this.completeFilePath, data);
+            }
+
+
+            return data.FirstOrDefault(d => d.Id == id);
+        }
+
         public virtual async Task UpdateAsync(TEntity entity)
         {
             var allEntities = await this.GetAllAsync();
-
-            var matching = allEntities.FirstOrDefault(e => e.Id == entity.Id);
+            var allEntitiesList = allEntities.ToList();
+            var matching = allEntitiesList.FirstOrDefault(e => e.Id == entity.Id);
 
             if(matching != null)
             {
-                matching = entity;
+                allEntitiesList[allEntitiesList.IndexOf(matching)] = entity;
             }
 
-            await WriteToFileAsync(this.completeFilePath, allEntities);
+            await WriteToFileAsync(this.completeFilePath, allEntitiesList);
         }
 
         public virtual async Task<int> AddAsync(TEntity entity)
