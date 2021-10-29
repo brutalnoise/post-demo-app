@@ -1,11 +1,49 @@
+import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ButtonRectangleComponent } from "./components/common/button-rectangle/button-rectangle.component";
 import { Configuration } from "./constants/configuration";
+import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
+import { BaseHttpService } from "./services/baseHttp.service";
+import { CommentService } from "./services/comment.service";
+import { MiscService } from "./services/misc.service";
+import { PostService } from "./services/post.service";
+import { UserService } from "./services/user.service";
 
 const services = [
-  Configuration
+  Configuration,
+  BaseHttpService,
+  CommentService,
+  PostService,
+  UserService,
+  MiscService
+]
+
+const modules = [
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+]
+
+const components = [
+  ButtonRectangleComponent
+]
+
+const pipes = [
+  SafeHtmlPipe
 ]
 
 @NgModule({
+  imports: [...modules],
+  declarations: [
+    ...components, 
+    ...pipes
+  ],
+  exports: [
+    ...modules,
+  ...components,
+  ...pipes
+]
 })
 
 export class SharedModule {
@@ -13,7 +51,9 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
-        ...services
+        ...modules,
+        ...services,
+        ...pipes
       ],
     };
   }

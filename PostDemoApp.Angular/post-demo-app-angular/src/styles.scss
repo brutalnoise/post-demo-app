@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #cccccc !important;
+}
+
+.hoverable {
+    cursor: pointer;
+}
+
+.pull-right {
+    float:right;
+}
+
+.jumbotron {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.container {
+    padding: 18px 15px;
+    border-left: 1px solid #939699;
+    border-right: 1px solid #939699;
+    background-color: #f7f9fa;
+}

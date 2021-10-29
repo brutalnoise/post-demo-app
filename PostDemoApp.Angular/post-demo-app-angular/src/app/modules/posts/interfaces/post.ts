@@ -6,4 +6,6 @@ export interface Post {
     user: User;
     title: string;
     body: string;
+    commentsCount: number;
+    isFavourite: boolean;
 }

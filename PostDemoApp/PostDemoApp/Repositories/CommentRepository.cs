@@ -1,14 +1,11 @@
-﻿using PostDemoApp.Constants;
-using PostDemoApp.Entities;
-using System.Net.Http;
+﻿using PostDemoApp.Entities;
 
 namespace PostDemoApp.Repositories
 {
-    public class CommentRepository : BaseRepository<Post>
+    public class CommentRepository : BaseRepository<Comment>
     {
-        public CommentRepository(HttpClient httpClient): base(httpClient)
+        public CommentRepository()
         {
-            base.baseUrl = ApiEndpoints.CommentsEndpoint;
         }
     }
 }

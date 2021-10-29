@@ -1,0 +1,13 @@
+<div class="card mb-5">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-md-10">
+                <h5 class="card-title"><a href="mailto:{{comment.email}}" target="_blank">{{comment.email}}</a></h5>
+                <p class="card-text" [innerHtml]="comment.body | safeHtml"></p>
+            </div>
+            <div class="col-12 col-md-2">
+                <app-button-rectangle class="pull-right" (clicked)="deleteComment()" [icon]="'delete'"></app-button-rectangle>  
+            </div>
+        </div>
+    </div>
+</div>

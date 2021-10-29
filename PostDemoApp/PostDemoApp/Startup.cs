@@ -10,6 +10,7 @@ using AutoMapper;
 using PostDemoApp.Extensions;
 using PostDemoApp.Services;
 using PostDemoApp.Services.Interfaces;
+using PostDemoApp.Constants;
 
 namespace PostDemoApp
 {
@@ -63,6 +64,8 @@ namespace PostDemoApp
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            ApiEndpoints.ApiBaseUrl = Configuration["BaseApiUrl"];
+
             this.LoadServices(services);
         }
 
@@ -93,11 +96,15 @@ namespace PostDemoApp
         //TODO add extension to load dependencies
         private void LoadServices(IServiceCollection services)
         {
-            services.AddHttpClient<IUnitOfWork>();
+            services.AddHttpClient<IApiService>();
+
+            services.AddTransient<IApiService, ApiService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICommentService, CommentService>();
+
+            services.AddHostedService<MigrationHostedService>();
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using PostDemoApp.Entities;
 using PostDemoApp.Models;
 using PostDemoApp.Services.Interfaces;
 using PostDemoApp.UnitOfWorks.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PostDemoApp.Services
@@ -20,12 +22,18 @@ namespace PostDemoApp.Services
 
         public async Task<CommentModel> Add(CommentModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<Comment>(model);
+            
+            var id = await this.unitOfWork.CommentRepository.AddAsync(entity);
+
+            model.Id = id;
+
+            return model;
         }
 
         public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await this.unitOfWork.CommentRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<CommentModel>> List()
@@ -34,9 +42,26 @@ namespace PostDemoApp.Services
             return this.mapper.Map<List<CommentModel>>(res);
         }
 
+        public async Task<IEnumerable<CommentModel>> GetAllByPostId(int postId)
+        {
+            var res = await this.unitOfWork.CommentRepository.GetAllAsync();
+            res = res.Where(c => c.PostId == postId);
+
+            return this.mapper.Map<List<CommentModel>>(res);
+        }
+
         public async Task<CommentModel> Update(CommentModel model)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<Comment>(model);
+            await this.unitOfWork.CommentRepository.UpdateAsync(entity);
+
+            return model;
+        }
+
+        public async Task<CommentModel> GetById(int id)
+        {
+            var entity = await this.unitOfWork.CommentRepository.GetByIdAsync(id);
+            return this.mapper.Map<CommentModel>(entity);
         }
     }
 }
