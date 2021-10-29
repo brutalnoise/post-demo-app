@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
 import { PostService } from "src/app/modules/shared/services/post.service";
@@ -20,7 +20,8 @@ export class PostDetailsComponent {
 
     constructor(private readonly postService: PostService,
         private readonly changeDetectorRef: ChangeDetectorRef,
-        private readonly route: ActivatedRoute) {
+        private readonly route: ActivatedRoute,
+        private readonly router: Router) {
 
     }
 
@@ -46,5 +47,9 @@ export class PostDetailsComponent {
             this.post = res;
             this.changeDetectorRef.markForCheck();
         }))
+    }
+
+    backToList() {
+        this.router.navigate(["/posts/list"]);
     }
 }

@@ -1,9 +1,10 @@
 <div class="container">
     <div class="jumbotron">
-        <h1>Posts</h1>
+        <h1 class="d-inline-block">Posts</h1>
+        <app-button-rectangle class="pull-right" (clicked)="refreshList()" icon="refresh" [text]="'Refresh Posts'"></app-button-rectangle>
     </div>
     <div class="panel panel-primary">
-        <app-button-rectangle (clicked)="refreshList()" [text]="'Refresh Posts'"></app-button-rectangle>
+        
         <table class="table">
             <thead>
               <tr>

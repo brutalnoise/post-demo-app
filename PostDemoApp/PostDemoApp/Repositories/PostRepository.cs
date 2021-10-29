@@ -1,14 +1,11 @@
-﻿using PostDemoApp.Constants;
-using PostDemoApp.Entities;
-using System.Net.Http;
+﻿using PostDemoApp.Entities;
 
 namespace PostDemoApp.Repositories
 {
     public class PostRepository : BaseRepository<Post>
     {
-        public PostRepository(HttpClient httpClient): base(httpClient)
+        public PostRepository()
         {
-            base.baseUrl = ApiEndpoints.PostsEndpoint;
         }
     }
 }

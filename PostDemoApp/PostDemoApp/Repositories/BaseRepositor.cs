@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using PostDemoApp.Entities.Base;
+using PostDemoApp.Extensions;
 using PostDemoApp.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace PostDemoApp.Repositories
@@ -14,14 +13,10 @@ namespace PostDemoApp.Repositories
     public abstract class BaseRepository<TEntity>: IBaseRepository<TEntity>
         where TEntity : BaseEntity
     {
-        private readonly HttpClient httpClient;
-        protected string baseUrl = "";
-        private const string suffix = ".json";
         private readonly string completeFilePath;
-        public BaseRepository(HttpClient httpClient)
+        public BaseRepository()
         {
-            this.httpClient = httpClient;
-            this.completeFilePath = GetCompleteFilePath();
+            this.completeFilePath = FilePathExtensions.AbsolutePathToJsonFile(typeof(TEntity));
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -35,7 +30,6 @@ namespace PostDemoApp.Repositories
             }
             else
             {
-                data = await httpClient.GetFromJsonAsync<IEnumerable<TEntity>>(baseUrl);
                 await WriteToFileAsync(this.completeFilePath, data);
             }
 
@@ -51,12 +45,6 @@ namespace PostDemoApp.Repositories
             {
                 data = await GetAllFromDisk(this.completeFilePath);
             }
-            else
-            {
-                data = await httpClient.GetFromJsonAsync<IEnumerable<TEntity>>(baseUrl);
-                await WriteToFileAsync(this.completeFilePath, data);
-            }
-
 
             return data.FirstOrDefault(d => d.Id == id);
         }
@@ -100,21 +88,6 @@ namespace PostDemoApp.Repositories
         }
 
         #region helpers 
-        private string GetCompleteFilePath()
-        {
-            var systemPath = System.Environment.
-                                         GetFolderPath(
-                                             Environment.SpecialFolder.CommonApplicationData
-                                         );
-
-            var fileName = this.GetProperFileName(typeof(TEntity));
-            return Path.Combine(systemPath, fileName);
-        }
-
-        private string GetProperFileName(Type entityType)
-        {
-            return $"{entityType.Name.ToLower()}{suffix}";
-        }
 
         private async Task WriteToFileAsync(string completeFilePath, IEnumerable<TEntity> data)
         {
@@ -124,8 +97,6 @@ namespace PostDemoApp.Repositories
 
         private async Task<IEnumerable<TEntity>> GetAllFromDisk(string completeFilePath)
         {
-            //StreamReader sr = new StreamReader(completeFilePath);
-            //string jsonString = sr.ReadToEnd();
             string jsonString = await File.ReadAllTextAsync(completeFilePath);
             var data = JsonConvert.DeserializeObject<IEnumerable<TEntity>>(jsonString);
             return data;

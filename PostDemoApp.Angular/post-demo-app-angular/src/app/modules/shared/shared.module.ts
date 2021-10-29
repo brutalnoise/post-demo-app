@@ -6,6 +6,7 @@ import { Configuration } from "./constants/configuration";
 import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
 import { BaseHttpService } from "./services/baseHttp.service";
 import { CommentService } from "./services/comment.service";
+import { MiscService } from "./services/misc.service";
 import { PostService } from "./services/post.service";
 import { UserService } from "./services/user.service";
 
@@ -14,7 +15,8 @@ const services = [
   BaseHttpService,
   CommentService,
   PostService,
-  UserService
+  UserService,
+  MiscService
 ]
 
 const modules = [

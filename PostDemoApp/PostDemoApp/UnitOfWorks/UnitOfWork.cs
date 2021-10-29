@@ -6,14 +6,13 @@ namespace PostDemoApp.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private HttpClient httpClient;
         private UserRepository userRepository;
         private CommentRepository commentRepository;
         private PostRepository postRepository;
 
-        public UnitOfWork(HttpClient httpClient)
+        public UnitOfWork()
         {
-            this.httpClient = httpClient;
+
         }
 
         public UserRepository UserRepository 
@@ -21,7 +20,7 @@ namespace PostDemoApp.UnitOfWorks
             get
             {
                 if (this.userRepository == null)
-                    this.userRepository = new UserRepository(this.httpClient);
+                    this.userRepository = new UserRepository();
 
                 return this.userRepository;
             }
@@ -31,7 +30,7 @@ namespace PostDemoApp.UnitOfWorks
             get
             {
                 if (this.commentRepository == null)
-                    this.commentRepository = new CommentRepository(this.httpClient);
+                    this.commentRepository = new CommentRepository();
 
                 return this.commentRepository;
             }
@@ -41,7 +40,7 @@ namespace PostDemoApp.UnitOfWorks
             get
             {
                 if (this.postRepository == null)
-                    this.postRepository = new PostRepository(this.httpClient);
+                    this.postRepository = new PostRepository();
 
                 return this.postRepository;
             }

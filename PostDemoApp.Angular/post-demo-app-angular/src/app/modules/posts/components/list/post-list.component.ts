@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
 import { Subscription } from "rxjs";
+import { MiscService } from "src/app/modules/shared/services/misc.service";
 import { PostService } from "src/app/modules/shared/services/post.service";
 import { Post } from "../../interfaces/post";
 
@@ -19,7 +20,8 @@ export class PostListComponent {
     sortedAlphabetically: boolean = true;
 
     constructor(private readonly postService: PostService,
-        private readonly changeDetectorRef: ChangeDetectorRef) {
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly miscService: MiscService) {
         
     }
 
@@ -43,9 +45,9 @@ export class PostListComponent {
 
     private performInitialSort() {
         if (this.sortedByTitle) {
-            this.sortByTitle();
+            this.sortByTitle(true);
         } else {
-            this.sortByAuthor();
+            this.sortByAuthor(true);
         }
     }
 
@@ -72,11 +74,13 @@ export class PostListComponent {
     }
 
     refreshList() {
-        //todo
+        this.subscriptions.add(this.miscService.RefreshData().subscribe(res => {
+            this.getList();
+        }))
     }
 
-    sortByTitle() {
-        if(this.sortedByTitle) {
+    sortByTitle(isInitialSort: boolean = false) {
+        if(this.sortedByTitle && !isInitialSort) {
             this.sortedAlphabetically = !this.sortedAlphabetically;
         } else {
             this.sortedAlphabetically = true;
@@ -91,8 +95,8 @@ export class PostListComponent {
         this.changeDetectorRef.markForCheck();
     }
 
-    sortByAuthor() {
-        if(!this.sortedByTitle) {
+    sortByAuthor(isInitialSort: boolean = false) {
+        if(!this.sortedByTitle && !isInitialSort) {
             this.sortedAlphabetically = !this.sortedAlphabetically;
         } else {
             this.sortedAlphabetically = true;

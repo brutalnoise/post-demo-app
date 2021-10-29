@@ -1,3 +1,8 @@
+
+body {
+    background-color: #cccccc !important;
+}
+
 .hoverable {
     cursor: pointer;
 }
@@ -11,6 +16,9 @@
     border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
-:host {
-    background-color: #cfcdc9;
+.container {
+    padding: 18px 15px;
+    border-left: 1px solid #939699;
+    border-right: 1px solid #939699;
+    background-color: #f7f9fa;
 }
